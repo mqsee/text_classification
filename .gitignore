@@ -1,0 +1,8 @@
+*.pyc
+*.csv
+*.json
+*.xml
+*.iml
+*.pkl
+用户词典2.utf8
+同义词库1.utf8
