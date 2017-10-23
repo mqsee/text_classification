@@ -32,6 +32,7 @@ class QuestionMatch(object):
         self.word_user_q = [] # 词级别用户问题, 用词级别的ID代替
         self.pre_std_id_list = [] # 模型预测的最匹配的标准问题ID
         self.pre_std_q_list = []  # 模型预测的最匹配标准问题
+        self.pre_std_score_list = []  # 模型预测的最匹配标准问题的得分
         self.get_deal_char_user_q()
 
     def get_deal_char_user_q(self):
@@ -117,7 +118,7 @@ def build_vocab(q_list,voc_path):
     """
     print('build vocab...{}'.format(voc_path))
     voc = {'<s>':0}
-    voc_index = 1
+    voc_index = 0
     max_len = 0
     for q in q_list:
         max_len = max(max_len,len(q))
@@ -132,6 +133,22 @@ def build_vocab(q_list,voc_path):
         json.dump(voc_dict,f)
     print('build vocab...{} done'.format(voc_path))
     return voc,max_len
+
+def load_one(voc_dir,user_q):
+    """
+    构建一个QM对象，用来测试
+    :param user_q:
+    :return:
+    """
+    QM = QuestionMatch(user_q=user_q,std_id=-1,cv=-1)
+    char_voc_path = '{}char_voc.json'.format(voc_dir)
+    if os.path.isfile(char_voc_path):
+        with open(char_voc_path, 'r') as f:
+            char_voc_dir = json.load(f)
+            char_voc = char_voc_dir['voc']
+            char_max_len = char_voc_dir['max_len']
+        QM.get_char_user(char_voc, char_max_len)
+    return QM
 
 def load_data_cv(file_path,voc_dir,voc_mode,cv=5):
     """
@@ -190,10 +207,10 @@ def load_data_cv(file_path,voc_dir,voc_mode,cv=5):
             QM.get_word_user(word_voc, word_max_len)
 
     # 如果内存不够用的话，可以把deal_char_user_q和deal_word_user_q置空
-    for QM in rev:
-        print(QM.user_q, QM.std_id, QM.deal_char_user_q, QM.char_user_q)
-        print(QM.user_q, QM.std_id, QM.deal_word_user_q, QM.word_user_q)
-        print(QM.labels)
+    # for QM in rev:
+    #     print(QM.user_q, QM.std_id, QM.deal_char_user_q, QM.char_user_q)
+    #     print(QM.user_q, QM.std_id, QM.deal_word_user_q, QM.word_user_q)
+    # print(QM.labels)
     return rev, len(char_voc) if voc_mode == 1 else len(word_voc)
 
 if __name__ == '__main__':

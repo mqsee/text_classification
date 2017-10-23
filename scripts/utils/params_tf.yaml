@@ -1,0 +1,39 @@
+# params config
+# iter params
+batch_size:    256
+epoch:        15
+optimizer:     adam # only adam or RMSProp
+learn_rate:    0.01
+log_train_batch:  10  # 每隔几个batch在tensorboard里记录训练信息
+eval_dev_batch:  50  # 每隔几个batch评估一下切分出来的发展集
+early_stop_eval_n:  8000  # 每隔几次评估后，eval_acc不出现增长就早停止 not use now
+model_dir:     '../docs/tensorflow/model/'
+model_name:    'best'
+# model_type:    'CNN-non-static' # only CNN-static, CNN-non-static, CNN-rand valiable
+
+# data prarms
+model_type: 'char' # just char or word 字模型或者词模型
+user_q_dim:  0 # just placeholder
+vocab_size: 0 # just placeholder
+embed_dim:  50
+label:
+  dim: 3055
+  loss_weight:    1 # not use now
+  loss_activate:  'softmax' # only softmax
+  loss_func:  'categorical_crossentropy' # only categorical_crossentropy
+  activity_reg: {l1: 0.1}
+  batch_norm: {momentum: 0.9}
+# layer params
+Conv1D:
+    layer1:
+        filters:       100
+        filter_size:    2
+        padding_mode:   'valid'
+        pooling_size:  2
+        dropout:       0.1
+    layer2:
+        filters:       100
+        filter_size:   3
+        padding_mode:   'valid'
+        pooling_size:  3
+        dropout:      0.1

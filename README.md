@@ -6,6 +6,20 @@
     - 后期打算采用分类+排序的方法，
         - 分类可用中期的方法，只考虑用户问题，标准问题只作为一个标签
         - 排序可使用siamese等方法，用户问题和标准问题做运算。
+- 文件包说明
+    - scripts 代码部分
+        - 目前项目使用的是keras版本。
+        - utils 工具部分
+            - data_helper.py 数据加载，QuestionMatch类
+            - cnn_rnn_keras.py CNNRNN model部分,keras实现版本
+            - params_keras.yaml 参数部分
+        - train_keras.py 训练模型部分
+        - eval_keras.py 在Test_A和Test_B上测试以及提供接口部分。
+    - docs 数据部分
+        - raw 原始数据
+        - pro 处理过的数据
+        - keras keras模型的结果数据
+        - tensorflow tf模型的结果数据
 - TO DO
     - 添加logging模块，这样更方便查验
     - 建立KB库，使得模型效果更好

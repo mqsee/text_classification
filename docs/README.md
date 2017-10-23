@@ -23,6 +23,9 @@
     - std_label.json 标准问题对应的标签词典 (不存在，需要运行utils中的pre_process生成)
     - change_stop.json 根据raw中的停用此和同义词库生成的词典 (不存在，需要运行utils中的pre_process生成)
     - 用户词典2.utf8 jieba加载的用户词典
-- model 训练模型保存的模型文件
-- train 训练集的loss和acc, 方便tensorboard查看
-- dev 发展集的loss和acc, 方便tensorboard查看
+- tensorflow
+    - model 训练模型保存的模型文件
+    - train 训练集的loss和acc, 方便tensorboard查看
+    - dev 发展集的loss和acc, 方便tensorboard查看
+- keras
+    - model 保存的模型和模型图

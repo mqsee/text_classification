@@ -1,0 +1,23 @@
+# params config
+# iter params
+batch_size:    256
+epoch:        15
+model_dir:   '../docs/keras'
+
+# data prarms
+model_type: 'char' # just char or word 字模型或者词模型
+user_q_dim:  0 # just placeholder
+vocab_size: 0 # just placeholder
+embed_dim:  50
+label_dim: 3055
+
+drop_out_1: 0.1
+drop_out_2: 0.1
+
+# cnn params
+filters: 100
+pool_size_1: 2
+pool_size_2: 3
+padding_mode: "valid"
+activation: "relu"
+strides: 1
